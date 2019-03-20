@@ -1,0 +1,32 @@
+package dbconnection;
+import java.sql.*;
+;
+/**
+ *
+ * @author Zerin
+ */
+public class Dbconnection {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+     
+        try {
+            String url = "jdbc:oracle:thin:@localhost:1521:XE";
+            try (Connection conn = DriverManager.getConnection(url,"ZENIA","zenia")) {
+                Statement st = conn.createStatement();
+           //     st.executeUpdate("INSERT INTO NEWSTUDENT " +
+                      //  "VALUES (2, 'ZENIA')");
+                ResultSet rs = st.executeQuery("SELECT name FROM NEWSTUDENT");
+                while (rs.next()) {
+  String Name = rs.getString("name");
+  System.out.println(Name + "\n");
+}
+            }
+        } catch (SQLException e) {
+           System.err.println("Got an exception! "); 
+            System.err.println(e.getMessage()); 
+        }
+}
+}
